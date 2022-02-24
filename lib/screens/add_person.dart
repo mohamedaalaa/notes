@@ -48,24 +48,33 @@ class _AddPersonState extends State<AddPerson> {
           Row(
             children: [
               Obx(() => (controller.isLoading.value)
-                  ? const CircularProgressIndicator(color: Colors.purple,)
+                  ? const CircularProgressIndicator(
+                      color: Colors.purple,
+                    )
                   : IconButton(
                       onPressed: () {
                         if (key.currentState!.validate() && base64File != "") {
-                          controller.insertUser(User(
-                              username: nameController.text,
-                              password: passwordController.text,
-                              email: emailController.text,
-                              imageAsBase64: base64File,
-                              intrestId: "1",
-                              id: "1")).then((value){
-                                Navigator.of(context).pop();
-                              });
+                          controller
+                              .insertUser(User(
+                                  username: nameController.text,
+                                  password: passwordController.text,
+                                  email: emailController.text,
+                                  imageAsBase64: base64File,
+                                  intrestId: "1",
+                                  id: "1"))
+                              .then((value) {
+                            Navigator.of(context).pop();
+                          });
                         }
                       },
                       icon: const Icon(Icons.save))),
-              const SizedBox(width: 4,),
-              IconButton(onPressed: ()=>Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const Settings())), icon:const Icon(Icons.settings))
+              const SizedBox(
+                width: 4,
+              ),
+              IconButton(
+                  onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const Settings())),
+                  icon: const Icon(Icons.settings))
             ],
           )
         ],
@@ -83,7 +92,11 @@ class _AddPersonState extends State<AddPerson> {
                   radius: 30,
                   child: base64File == ""
                       ? const Icon(Icons.person)
-                      : ClipRect(child: Image.memory(base64.decode(base64File),fit: BoxFit.cover,)),
+                      : ClipRect(
+                          child: Image.memory(
+                          base64.decode(base64File),
+                          fit: BoxFit.cover,
+                        )),
                 ),
               ),
               const SizedBox(

@@ -6,9 +6,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as path;
 
 class DBHelper {
-
-
-
   static Future<Database> databaseUsers() async {
     final dbPath = await sql.getDatabasesPath();
     return sql.openDatabase(path.join(dbPath, 'users.db'),
@@ -29,19 +26,13 @@ class DBHelper {
     return db.query(table);
   }
 
-
-
-
-
-
-
   static Future<Database> databaseNotes() async {
     final dbPath = await sql.getDatabasesPath();
     return sql.openDatabase(path.join(dbPath, 'notes.db'),
         onCreate: (db, version) {
-          return db.execute(
-              'CREATE TABLE notes(userid TEXT PRIMARY KEY,placedatetime TEXT,text TEXT)');
-        }, version: 1);
+      return db.execute(
+          'CREATE TABLE notes(userid TEXT PRIMARY KEY,placedatetime TEXT,text TEXT)');
+    }, version: 1);
   }
 
   static Future<void> insertNote(
@@ -54,43 +45,36 @@ class DBHelper {
     final db = await DBHelper.databaseNotes();
     return db.query(table);
   }
-
 }
 
-class GetUsers extends ChangeNotifier{
-
-
-  List<User> users=[];
+class GetUsers extends ChangeNotifier {
+  List<User> users = [];
   Future<void> fetchAndSetUsers() async {
     print('here');
     final dataList = await DBHelper.getUsersData('users');
     print('here1');
     users = dataList
         .map((e) => User(
-        username: e["username"],
-        password: e["password"],
-        email: e["email"],
-        imageAsBase64: e["imageAsBase64"],
-        intrestId: e['username'],
-        id: e['id']))
+            username: e["username"],
+            password: e["password"],
+            email: e["email"],
+            imageAsBase64: e["imageAsBase64"],
+            intrestId: e['username'],
+            id: e['id']))
         .toList();
     //print('here2');
     notifyListeners();
-
   }
 
-
-
-  List<Note> notes=[];
+  List<Note> notes = [];
   Future<void> fetchAndSetNotes() async {
     print('here');
     final dataList = await DBHelper.getNotesData('notes');
     print('here1');
     notes = dataList
-        .map((e) => Note(text: e['text'], placeDateTime:e[''], userId:e[''])).toList();
+        .map((e) => Note(text: e['text'], placeDateTime: e[''], userId: e['']))
+        .toList();
     //print('here2');
     notifyListeners();
-
   }
-
 }
