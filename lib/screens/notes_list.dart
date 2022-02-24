@@ -61,8 +61,14 @@ class _NotesListState extends State<NotesList> {
             ,itemBuilder: (context,i){
               return Padding(
                 padding: const EdgeInsets.all(10),
-                child: ListTile(
-                  title: Text(noteControllerr.noteList[i].text),
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: Text(noteControllerr.noteList[i].text),
+                    ),
+                    const SizedBox(height: 5,),
+                    const Divider(thickness: 2,)
+                  ],
                 ),
               );
             })

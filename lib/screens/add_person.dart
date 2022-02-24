@@ -48,7 +48,7 @@ class _AddPersonState extends State<AddPerson> {
           Row(
             children: [
               Obx(() => (controller.isLoading.value)
-                  ? const CircularProgressIndicator()
+                  ? const CircularProgressIndicator(color: Colors.purple,)
                   : IconButton(
                       onPressed: () {
                         if (key.currentState!.validate() && base64File != "") {
@@ -83,7 +83,7 @@ class _AddPersonState extends State<AddPerson> {
                   radius: 30,
                   child: base64File == ""
                       ? const Icon(Icons.person)
-                      : Image.memory(base64.decode(base64File)),
+                      : ClipRect(child: Image.memory(base64.decode(base64File),fit: BoxFit.cover,)),
                 ),
               ),
               const SizedBox(

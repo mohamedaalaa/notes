@@ -63,7 +63,7 @@ class _UsersListState extends State<UsersList> {
             return ListTile(
               leading: CircleAvatar(
                 radius:30,
-                child:noteController.usersList[i].imageAsBase64==""?const Icon(Icons.person):Image.memory(base64.decode(noteController.usersList[i].imageAsBase64)),
+                child:noteController.usersList[i].imageAsBase64==""?const Icon(Icons.person):ClipRect(child: Image.memory(base64.decode(noteController.usersList[i].imageAsBase64),fit: BoxFit.cover,)),
               ),
               title: Text(noteController.usersList[i].username),
             );

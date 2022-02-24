@@ -72,6 +72,9 @@ class _AddNoteState extends State<AddNote> {
           key: key,
           child: TextFormField(
             maxLines: 7,
+            decoration: const InputDecoration(
+              hintText: "add note"
+            ),
             controller: noteController,
             validator: (value){
               if(value!.isEmpty){
